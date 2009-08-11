@@ -6,7 +6,7 @@ setupdir = os.path.abspath(
 os.chdir(setupdir)
 
 name='minitage.paste.instances.cas'
-version = '1.0'
+version = '1.1'
 
 def read(rnames):
     return open(
@@ -40,6 +40,7 @@ setup(
     author='Mathieu Pasquet',
     author_email='kiorky@cryptelium.net',
     url='http://cheeseshop.python.org/pypi/%s' % name,
+    download_url='http://distfiles.minitage.org/public/externals/minitage/',
     license='BSD',
     packages=find_packages(exclude=['ez_setup']),
     namespace_packages=['minitage', 'minitage.paste', 'minitage.paste.instances'],
