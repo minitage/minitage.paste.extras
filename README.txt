@@ -20,7 +20,7 @@ Usage
 
 Use throught paster::
 
-    easy_install minitage.paste.cas
+    easy_install minitage.paste.instances.cas
     paster create -t minitage.instances.cas target_project
 
 This will create a new project and a new minilay in your current minitage.
