@@ -87,20 +87,20 @@
      <Connector
          protocol="org.apache.coyote.http11.Http11AprProtocol"
          port="$ssl_port"
-         enableLookups="true" 
+         enableLookups="true"
          disableUploadTimeout="true"
-         acceptCount="100"  
-         scheme="https" 
-         secure="true" 
+         acceptCount="100"
+         scheme="https"
+         secure="true"
          SSLEnabled="true"
-         SSLCertificateFile="${sys}/var/data/tomcat/cas/keys/server.crt"
-         SSLCertificateKeyFile="${sys}/var/data/tomcat/cas/keys/server.key"
-         SSLCACertificateFile="${sys}/var/data/tomcat/cas/keys/ca.crt"
+         SSLCertificateFile="${sys}/etc/ssl/certs/${cas_name}-server.crt"
+         SSLCertificateKeyFile="${sys}/etc/ssl/private/${cas_name}-server.key"
+         SSLCACertificateFile="${sys}/etc/ssl/certs/${cas_name}-ca.crt"
          clientAuth="false"
          sslProtocol="TLS"
          maxThreads="200"
          minSpareThreads="5"
-         maxSpareThreads="75" 
+         maxSpareThreads="75"
        />
 
     <!-- Define an AJP 1.3 Connector on port 8009 -->

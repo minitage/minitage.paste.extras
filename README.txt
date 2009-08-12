@@ -14,6 +14,7 @@ Projects profiles
 ==================
 
     - minitage.instances.cas: create a cas instance
+    - minitage.instances.openldap: create an openldap instance
 
 Usage
 ======
@@ -23,5 +24,10 @@ Use throught paster::
     easy_install minitage.paste.instances.cas
     paster create -t minitage.instances.cas target_project
 
-This will create a new project and a new minilay in your current minitage.
+NOTES
+=======
+Please look the official documentation for further instructions::
+
+    http://minitage.org/paster/instances/index.html
+
 

@@ -2,9 +2,17 @@
 CHANGES
 ==============
 
+
+1.2
+----
+
+    - renamed in minitage.instance.extras
+    - unify the SSL certificates creation and installation path
+
 1.0
 --------------
-- Initial release
+
+    - Initial release
 
 
 

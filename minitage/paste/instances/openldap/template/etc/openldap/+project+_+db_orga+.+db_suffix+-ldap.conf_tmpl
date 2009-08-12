@@ -1,0 +1,4 @@
+BASE            dc=$db_orga,dc=$db_suffix
+URI             ldaps://$db_host:$ssl_port ldap://$db_host:$db_port
+
+

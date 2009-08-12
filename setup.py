@@ -5,8 +5,8 @@ setupdir = os.path.abspath(
 )
 os.chdir(setupdir)
 
-name='minitage.paste.instances.cas'
-version = '1.1'
+name='minitage.paste.extras'
+version = '1.2'
 
 def read(rnames):
     return open(
@@ -16,7 +16,7 @@ def read(rnames):
 setup(
     name=name,
     version=version,
-    description='Extension for minitage.paste allowing users to have a tomcat deployed with a CAS server configured on top of it',
+    description='Extension for minitage.paste allowing users to have some server instaces configured on top of projects',
     long_description= (
         read('README.txt')
         + '\n' +
@@ -60,6 +60,7 @@ setup(
     entry_points = {
         'paste.paster_create_template' : [
             'minitage.instances.cas = minitage.paste.instances.cas:Template',
+            'minitage.instances.openldap = minitage.paste.instances.openldap:Template',
 
         ]
     },
