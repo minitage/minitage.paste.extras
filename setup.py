@@ -6,7 +6,7 @@ setupdir = os.path.abspath(
 os.chdir(setupdir)
 
 name='minitage.paste.extras'
-version = '1.5'
+version = '1.6'
 
 def read(rnames):
     return open(

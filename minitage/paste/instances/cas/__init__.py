@@ -37,6 +37,8 @@ import re
 import subprocess
 import sys
 import shutil
+import xml.dom.minidom
+import pkg_resources 
 
 from distutils.dir_util import copy_tree
 
@@ -48,9 +50,27 @@ re_flags = re.M|re.U|re.I|re.S
 running_user = getpass.getuser()
 version = '6.0.20'
 
+
+
+
+def get_cas_version():
+    version_file = pkg_resources.resource_filename(
+        'minitage.paste.instances.cas',
+        'template/var/data/tomcat/'
+        'cas/webapps/cas/META-INF/'
+        'maven/org.jasig.cas/cas-server-webapp/pom.xml')
+    doc = xml.dom.minidom.parse(version_file)
+    for node in doc.getElementsByTagName('parent'):
+        for gnode in node.getElementsByTagName('groupId'):
+            if gnode.firstChild.nodeValue == 'org.jasig.cas':
+                return node.getElementsByTagName('version')[0].firstChild.nodeValue 
+
+
+cas_version = get_cas_version()
+
 class Template(common.Template):
 
-    summary = 'Template for creating a postgresql instance'
+    summary = 'Template for creating a CAS(v%s) server instance' % cas_version
     _template_dir = 'template'
     use_cheetah = True
     pg_present = False
@@ -127,7 +147,8 @@ class Template(common.Template):
             "    * %s\n"
             " * logs are in %s/var/log/tomvat/cas\n"
             " * symlinks for the configuration directory have been made into %s/etc.\n"
-            "\n" %(
+            " * The packaged CAS version is : %s.\n"
+            "\n" % (
                 vars['sys'],
                 vars['project'],
                 os.path.dirname(conf),
@@ -139,6 +160,7 @@ class Template(common.Template):
                 ),
                 vars['sys'],
                 vars['sys'],
+                cas_version
             )
         )
 
