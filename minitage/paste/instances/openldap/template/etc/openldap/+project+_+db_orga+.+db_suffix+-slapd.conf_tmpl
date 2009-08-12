@@ -77,5 +77,6 @@ access to attrs=gecos,description,loginShell
         by self write
         by * read
 access to *
+         by users read
          by * auth
 

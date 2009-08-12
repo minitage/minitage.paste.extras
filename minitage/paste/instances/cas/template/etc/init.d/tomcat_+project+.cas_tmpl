@@ -75,9 +75,9 @@ restart() {
     ebegin "Restarting $project - Tomcat - CAS"
     # "stop/start" seems to behave better.
     stop
-    einfo  "..."
+    einfo  "Waiting for server to quit a while..."
+    sleep 4
     start
-    eend \$?
 }
 
 status() {

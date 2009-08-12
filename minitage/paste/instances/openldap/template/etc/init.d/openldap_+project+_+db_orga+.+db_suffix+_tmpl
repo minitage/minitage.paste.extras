@@ -44,9 +44,9 @@ stop() {
 restart() {
     ebegin "Restarting OpenLDAP"
     stop
-    einfo  "..."
+    einfo  "Waiting for server to quit a while ..."
+    sleep 2
     start
-    eend \$?
 }
 
 status() {
