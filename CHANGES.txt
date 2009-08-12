@@ -2,6 +2,10 @@
 CHANGES
 ==============
 
+1.3
+-----
+
+    - change openldap ssl default port
 
 1.2
 ----
