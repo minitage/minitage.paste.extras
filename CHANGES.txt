@@ -3,6 +3,11 @@ CHANGES
 ==============
 
 
+1.8
+----
+
+    - make more senseof pyopenssl extra dependency.
+
 1.6
 ----
 

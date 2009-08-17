@@ -38,7 +38,7 @@ import sha
 import md5
 import base64
 
-from minitage.paste.instances import common
+from minitage.paste.instances import common, ssl
 from minitage.core.common import remove_path
 from paste.script import templates
 
@@ -105,7 +105,7 @@ class Template(common.Template):
     def post(self, command, output_dir, vars):
         sys = vars['sys']
         # be nice, link some files
-        common.generate_prefixed_ssl_bundle(vars, vars['ldap_name'])
+        ssl.generate_prefixed_ssl_bundle(vars, vars['ldap_name'])
         dirs = [os.path.join(sys, 'bin'),
                 os.path.join(sys, 'etc', 'init.d')]
         for directory in dirs:
@@ -181,7 +181,7 @@ Template.vars = common.Template.vars + \
             templates.var('db_user', 'LDAP Super user', default = running_user),
             templates.var('db_password', 'LDAP Super user password', default = running_user),
             templates.var('ol_version', 'OPENLDAP version', default = '2.4'),
-        ] + common.SSL_VARS
+        ] + ssl.SSL_VARS
 
 
 

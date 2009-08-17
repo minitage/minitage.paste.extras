@@ -42,16 +42,13 @@ import pkg_resources
 
 from distutils.dir_util import copy_tree
 
-from minitage.paste.instances import common
+from minitage.paste.instances import common, ssl
 from minitage.core.common import remove_path, which, search_latest
 from paste.script import templates
 
 re_flags = re.M|re.U|re.I|re.S
 running_user = getpass.getuser()
 version = '6.0.20'
-
-
-
 
 def get_cas_version():
     version_file = pkg_resources.resource_filename(
@@ -136,7 +133,7 @@ class Template(common.Template):
         )
         if not os.path.exists(keysp):
             os.makedirs(keysp)
-        common.generate_prefixed_ssl_bundle(vars, vars['cas_name'])
+        ssl.generate_prefixed_ssl_bundle(vars, vars['cas_name'])
         README = '\n\n%s' % (
             "Installation is now finished.\n"
             "------------------------------\n"
@@ -223,5 +220,5 @@ Template.vars = common.Template.vars + \
             templates.var('http_port', 'Port to listen to for http connection', default = '8080'),
             templates.var('admin_user', 'Tomcat administrator', default = running_user),
             templates.var('admin_password', 'Tomcat administrator password', default = 'secret'),
-        ] + common.SSL_VARS
+        ] + ssl.SSL_VARS
 # vim:set et sts=4 ts=4 tw=80:
