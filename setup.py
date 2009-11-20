@@ -46,7 +46,7 @@ setup(
     namespace_packages=['minitage', 'minitage.paste', 'minitage.paste.instances'],
     include_package_data=True,
     zip_safe=False,
-    install_requires = ['setuptools',
+    install_requires = [
                         'PasteScript',
                         'ZopeSkel',
                         'zc.buildout',
