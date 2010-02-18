@@ -1,0 +1,12 @@
+# # be aware that tomcat needs copytruncate to keep his logfile (stderr) open
+${sys}/var/log/tomcat/${tomcat_instance}/* {
+        compress
+        rotate 10
+        daily
+        create 660 $running_user
+        notifempty
+        size 10M
+        sharedscripts
+        missingok
+        copytruncate
+}

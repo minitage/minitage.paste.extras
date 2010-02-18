@@ -1,0 +1,116 @@
+
+#!/usr/bin/env bash
+# Copyright (C) 2008, Mathieu PASQUET <kiorky@cryptelium.net>
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# inspired by gentoo/openrc init scripts.
+
+. ${sys}/share/tomcat/${tomcat_instance}.env
+PID_FILE='${sys}/var/run/tomcat/${tomcat_instance}.pid'
+
+# add /sbin 's when we run in user mode in the PATH
+export PATH=\$PATH:/sbin:/usr/sbin:/usr/local/sbin
+effectiveuser=$running_user
+
+logpath=${sys}/var/log/tomcat/${tomcat_instance}
+pidfile="\$PID_FILE"
+
+if [[ \$(whoami) == 'root' ]];then
+    opts="-user \$effectiveuser"
+fi
+
+startup_var=minitage.startup.${project}.${tomcat_instance}
+JAVA_OPTS="\$JAVA_OPTS -D\$startup_var=1"
+export JAVA_OPTS
+
+return_error() {
+    return 1
+}
+
+nb_tomcat_processes() {
+    echo \$(ps aux|grep \$startup_var|grep -v grep|wc -l)
+}
+
+binary_prefix="tomcat_${tomcat_instance}"
+start() {
+    local ret
+    ebegin  "Starting $project - Tomcat - ${tomcat_instance}"
+    if [[ \$(nb_tomcat_processes) -gt 0 ]];then
+        ewarn "Tomcat seems already running:"
+        ps aux|grep \$startup_var|grep -v grep
+        return_error
+    else
+        \${binary_prefix}.startup.sh \$opts
+    fi
+    ret=\$?
+    eend \$ret
+}
+
+stop() {
+    local ret
+    ebegin "Stopping $project - Tomcat - ${tomcat_instance}"
+    if [[ \$(nb_tomcat_processes) == 0 ]];then
+        ewarn "Tomcat seems not running:"
+        return_error
+    else
+        \${binary_prefix}.shutdown.sh \$opts
+    fi
+    ret=\$?
+    eend \$ret
+}
+
+reload() {
+    ebegin "Reloading $project - Tomcat - ${tomcat_instance} configuration"
+    echo "not implemented, using restart"
+    restart
+    eend \$?
+}
+
+restart() {
+    ebegin "Restarting $project - Tomcat - ${tomcat_instance}"
+    # "stop/start" seems to behave better.
+    stop
+    einfo  "Waiting for server to quit a while..."
+    sleep 4
+    start
+}
+
+status() {
+    ebegin "Status of $project - Tomcat - ${tomcat_instance}"
+    # "stop/start" seems to behave better.
+    if [[ \$(nb_tomcat_processes) -gt 0 ]];then
+        ewarn "Tomcat seems running:"
+        ps aux|grep \$startup_var|grep -v grep
+    else
+        ewarn "Tomcat seems not running:"
+    fi
+}
+
+checkconfig() {
+    ebegin "Checking $project - Tomcat - ${tomcat_instance} configuration"
+    echo "not implemented"
+    eend \$?
+
+}
+
+actions="status restart start stop checkconfig reload"
+for action in \$actions;do
+    if [[ "\$1" == "\$action" ]];then
+        \$action
+    donesomething=true
+    fi
+done
+
+if [[ -z \$donesomething ]];then
+    echo "Possible actions are \$actions"
+fi
+

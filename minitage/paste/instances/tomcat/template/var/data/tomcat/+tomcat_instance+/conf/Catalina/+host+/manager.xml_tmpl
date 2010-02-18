@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context
+    path="/manager"
+    debug="0"
+    privileged="true"
+    docBase="${catalina_home}/webapps/manager"
+    >
+  <Valve
+      className="org.apache.catalina.valves.RemoteAddrValve"
+      allow="127\.0\.0\.1"
+    />
+</Context>
+
