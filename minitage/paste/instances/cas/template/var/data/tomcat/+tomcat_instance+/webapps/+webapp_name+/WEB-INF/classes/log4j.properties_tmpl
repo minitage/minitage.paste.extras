@@ -9,7 +9,7 @@ log4j.appender.stdout.layout.ConversionPattern=%d %p [%c] - <%m>%n
 
 log4j.appender.logfile=org.apache.log4j.RollingFileAppender
 #end raw
-log4j.appender.logfile.File=${sys}/var/data/tomcat/cas/logs/cas.log
+log4j.appender.logfile.File=${sys}/var/data/tomcat/${tomcat_instance}/logs/cas.log
 #raw
 log4j.appender.logfile.MaxFileSize=512KB
 # Keep three backup files.

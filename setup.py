@@ -6,7 +6,7 @@ setupdir = os.path.abspath(
 os.chdir(setupdir)
 
 name='minitage.paste.extras'
-version = '1.8'
+version = '1.10'
 
 def read(rnames):
     return open(
@@ -40,7 +40,6 @@ setup(
     author='Mathieu Pasquet',
     author_email='kiorky@cryptelium.net',
     url='http://cheeseshop.python.org/pypi/%s' % name,
-    download_url='http://distfiles.minitage.org/public/externals/minitage/',
     license='BSD',
     packages=find_packages(exclude=['ez_setup']),
     namespace_packages=['minitage', 'minitage.paste', 'minitage.paste.instances'],
@@ -59,6 +58,7 @@ setup(
     # merged into django 'minitage.geodjango = minitage.paste.projects.geodjango:Template',
     entry_points = {
         'paste.paster_create_template' : [
+            'minitage.instances.tomcat = minitage.paste.instances.tomcat:Template',
             'minitage.instances.cas = minitage.paste.instances.cas:Template',
             'minitage.instances.openldap = minitage.paste.instances.openldap:Template',
 

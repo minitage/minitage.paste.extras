@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-. ${sys}/share/tomcat/cas.env
-tomcat-native-1.1.16-src $@

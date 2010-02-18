@@ -3,6 +3,20 @@ CHANGES
 ==============
 
 
+
+
+
+1.10
+-------
+
+    - refactor cas template
+    - add a standalone tomcat template
+
+1.9
+-----
+
+    - hosted on pypi
+
 1.8
 ----
 

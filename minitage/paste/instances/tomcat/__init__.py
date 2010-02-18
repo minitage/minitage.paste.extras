@@ -34,6 +34,7 @@ import getpass
 import pwd
 import grp
 import re
+import ConfigParser
 import subprocess
 import sys
 import shutil
@@ -57,6 +58,20 @@ class Template(common.Template):
     _template_dir = 'template'
     use_cheetah = True
     pg_present = False
+    required_templates = ['minitage.instances.env']
+    tomcat_vars = [
+            templates.var('catalina_home', 'Path to the tomcat install',  default = ''),
+            templates.var('tomcat_instance', 'tomcat instance name(without spaces or special chars', default = ''),
+            templates.var('user', 'Default user',  default = common.running_user),
+            templates.var('password', 'Default user password', default = 'secret'),
+            templates.var('host', 'Host to listen on', default = 'localhost'),
+            templates.var('ajp_port', 'Port to listen to for ajp connection', default = '8009'),
+            templates.var('ssl_port', 'Port to listen to for ssl connection', default = '8443'),
+            templates.var('tomcat_port', 'Port to listen to for tomcat', default = '8005'),
+            templates.var('http_port', 'Port to listen to for http connection', default = '8080'),
+            templates.var('admin_user', 'Tomcat administrator', default = running_user),
+            templates.var('admin_password', 'Tomcat administrator password', default = 'secret'),
+        ]
 
     def pre(self, command, output_dir, vars):
         common.Template.pre(self, command, output_dir, vars)
@@ -167,6 +182,8 @@ class Template(common.Template):
         print "Those informations have been saved in %s" % readmep
         open(readmep, 'w').write(README)
 
+        self.write_config(vars)
+
     def read_vars(self, command=None):
         vars = templates.Template.read_vars(self, command)
         print '!' * 80
@@ -190,22 +207,117 @@ class Template(common.Template):
                     )
         return vars
 
+    def write_config(self, vars):
+        path = get_tomcat_config_path(self, vars)
+        config = ConfigParser.ConfigParser()
+        if os.path.exists(path):
+            config.read(path)
+        # set a number of parameters
+        s = vars['tomcat_instance']
+        if not config.has_section(s):
+            config.add_section(s)
+        for opt in self.tomcat_vars:
+            config.set(s, opt.name, vars.get(opt.name, ''))
+        fic = open(path, 'w')
+        config.write(fic)
+        fic.flush()
+        fic.close()
+
+def get_tomcat_config_path(self, vars):
+    path = os.path.join(
+        vars['sys'], 
+        'var', 'data', 'tomcat', 'tomcats.cfg'
+    ) 
+    return path
+
 Template.required_templates = ['minitage.instances.env']
 gid = pwd.getpwnam(running_user)[3]
 #group = grp.getgrgid(gid)[0]
-Template.vars = common.Template.vars + \
-        [
-            templates.var('catalina_home', 'Path to the tomcat install',  default = ''),
-            templates.var('tomcat_instance', 'tomcat instance name(without spaces or special chars', default = ''),
-            templates.var('user', 'Default user',  default = common.running_user),
-            templates.var('password', 'Default user password', default = 'secret'),
-            templates.var('host', 'Host to listen on', default = 'localhost'),
-            templates.var('ajp_port', 'Port to listen to for ajp connection', default = '8009'),
-            templates.var('ssl_port', 'Port to listen to for ssl connection', default = '8443'),
-            templates.var('tomcat_port', 'Port to listen to for tomcat', default = '8005'),
-            templates.var('http_port', 'Port to listen to for http connection', default = '8080'),
-            templates.var('admin_user', 'Tomcat administrator', default = running_user),
-            templates.var('admin_password', 'Tomcat administrator password', default = 'secret'),
-        ] + ssl.SSL_VARS
+Template.vars = common.Template.vars + Template.tomcat_vars + ssl.SSL_VARS  
+
+
+class TomcatAppBaseTemplate(common.Template):
+
+    required_templates = []
+    webapp_type = 'tomcat_webapp'
+    summary = 'Template for creating a %s application inside a tomcat' % webapp_type
+
+    def __init__(self, *args, **kwargs):
+        self.vars =  common.Template.vars + [\
+                      templates.var(
+                          'tomcat_instance',
+                          'tomcat instance to drop the instance inside',
+                          default = ''),
+                      templates.var('webapp_name',
+                                    'tomcat instance to drop the instance inside',
+                                    default = self.webapp_type),
+                     ]
+        common.Template.__init__(self, *args, **kwargs)
+
+    def pre(self, command, output_dir, vars):
+        common.Template.pre(self, command, output_dir, vars)
+        vars['webapp_type'] = self.webapp_type
+        path = get_tomcat_config_path(self, vars)
+        config = ConfigParser.ConfigParser()
+        if os.path.exists(path):
+            config.read(path)        
+            for o in  config.options(vars['tomcat_instance']):
+                vars[o] = config.get(vars['tomcat_instance'], o)
+        else:
+            print 'Please install a tomcat instance named "%s" prior to run this paster.' % vars['tomcat_instance']
+            print '   EG: %s create -t minitage.instances.tomcat %s tomcat_instance=%s'  % (
+                sys.argv[0],
+                vars['project'] ,
+                vars['tomcat_instance']
+            )
+            sys.exit(-1)
+
+    def post(self, command, output_dir, vars):
+        # symlink conf, and logs directories inside $sys
+        print
+        README = '\n\n%s' % (
+            "Installation is now finished.\n"
+            "------------------------------\n"
+        )
+        if vars['inside_minitage']:
+            README += '\n%s' % (
+                "Please verify that tomcat-%s is in your minibuild's dependencies\n"
+                "---------------------------------------------------------------------\n"
+                "If not, please add it and run the following commands:\n"
+                " minimerge -v tomcat-%s\n"
+                " source %s/share/minitage/minitage.env\n"
+                " $MT/paster create -t minitage.instances.env %s\n"
+                "\n" % (version, version, vars['sys'], vars['project'])
+            )
+        README += '%s'% (
+                "\n-------------------------------------------------------------------------------------------------------\n"
+            " * %s is installed under %s"
+            "\n-------------------------------------------------------------------------------------------------------\n"
+            ""% (
+                self.webapp_type.upper(),
+                os.path.join(vars['sys'],
+                            'var',
+                            'tomcat',
+                            vars['tomcat_instance'],
+                            'webapps', vars['webapp_name']
+                           )
+            )
+        )
+        readmep = os.path.join(vars['path'], 'README.tomcat.%s' % (self.webapp_type))
+        print README
+        print "Those informations have been savec in %s" % readmep
+        open(readmep, 'w').write(README)
+
+    def read_vars(self, command=None):
+        vars = templates.Template.read_vars(self, command)
+        print '!' * 80
+        print ' Think to add a tomcat minibuild to your minibuild as dependency'
+        print ' before trying to run this paster.'
+        print '!' * 80
+        myname = special_chars_re.sub('', command.args[0])
+        for i, var in enumerate(vars[:]):
+            if var.name in ['tomcat_instance']:
+                vars[i].default = myname
+        return vars
 
 # vim:set et sts=4 ts=4 tw=0:
