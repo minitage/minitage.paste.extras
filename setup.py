@@ -6,7 +6,7 @@ setupdir = os.path.abspath(
 os.chdir(setupdir)
 
 name='minitage.paste.extras'
-version = '1.10'
+version = '1.11'
 
 def read(rnames):
     return open(
@@ -60,6 +60,7 @@ setup(
         'paste.paster_create_template' : [
             'minitage.instances.tomcat = minitage.paste.instances.tomcat:Template',
             'minitage.instances.cas = minitage.paste.instances.cas:Template',
+            'minitage.instances.hudson = minitage.paste.instances.hudson:Template',
             'minitage.instances.openldap = minitage.paste.instances.openldap:Template',
 
         ]

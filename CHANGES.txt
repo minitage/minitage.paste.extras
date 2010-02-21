@@ -11,6 +11,7 @@ CHANGES
 
     - refactor cas template
     - add a standalone tomcat template
+    - add an hudson template
 
 1.9
 -----

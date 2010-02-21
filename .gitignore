@@ -1,7 +1,9 @@
 *.pyc
+minitage/paste/instances/hudson/hudson.war
 dist
 *egg-info
 minitage/paste/instances/cas/cas-server-*-release.tar.gz
 minitage/paste/instances/cas/cas-server-*/
 minitage/paste/instances/cas/release/
+minitage/paste/instances/hudson/release/
 

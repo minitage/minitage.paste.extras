@@ -48,41 +48,71 @@ from paste.script import templates
 
 re_flags = re.M|re.U|re.I|re.S
 running_user = getpass.getuser()
-version = '6.0.20'
 
-
-def get_cas_version():
+def get_hudson_version():
     version_file = pkg_resources.resource_filename(
-        'minitage.paste.instances.cas',
+        'minitage.paste.instances.hudson',
         'template/var/data/tomcat/'
         '+tomcat_instance+/webapps/+webapp_name+/META-INF/'
-        'maven/org.jasig.cas/cas-server-webapp/pom.xml')
+        'maven/org.jvnet.hudson.main/hudson-war/pom.xml')
     doc = xml.dom.minidom.parse(version_file)
     for node in doc.getElementsByTagName('parent'):
         for gnode in node.getElementsByTagName('groupId'):
-            if gnode.firstChild.nodeValue == 'org.jasig.cas':
+            if gnode.firstChild.nodeValue == 'org.jvnet.hudson.main':
                 return node.getElementsByTagName('version')[0].firstChild.nodeValue
 
-cas_version = get_cas_version()
+
+hudson_version = get_hudson_version()
 
 class Template(tomcat.TomcatAppBaseTemplate):
 
-    summary = 'Template for creating a CAS(v%s) application in an existing tomcat instance' % cas_version
-    webapp_type = 'cas'
+    summary = 'Template for creating a HUDSON(v%s) application in an existing running tomcat instance' % hudson_version
+    webapp_type = 'hudson'
     _template_dir = 'template'
     use_cheetah = True
+
+    def __init__(self, *args, **kwargs):
+        tomcat.TomcatAppBaseTemplate.__init__(self, *args, **kwargs)
+        self.vars += [templates.var('hudson_irc_support', 'hudson irc support (true or false)', default = 'true'),
+                       templates.var('hudson_irc_server', 'hudson irc server to join', default = 'irc.freenode.net'),
+                       templates.var('hudson_irc_port', 'hudson irc server port', default = '6667'),
+                       templates.var('hudson_irc_nick', 'hudson irc nickname', default = 'hudson'),
+                       templates.var('hudson_irc_channels', 'comma separated list of channels to join ', default = '#hudson-test'),
+                       templates.var('hudson_email_from', 'comma separated list of channels to join ', default = 'hudson <foo@localhost>'),
+                       templates.var('hudson_url', 'Hudson accessible url for notificiation (mails, irc)', default = 'http://foo:8080/hudson')
+                      ]
+
+    def read_vars(self, command=None):
+        vars = tomcat.TomcatAppBaseTemplate.read_vars(self, command)
+        myname = tomcat.special_chars_re.sub('', command.args[0])
+        for i, var in enumerate(vars[:]):
+            if var.name in ['hudson_email_from']:
+                vars[i].default = '%s <%s@localhost>' % (myname, myname)
+            if var.name in ['hudson_irc_nick']:
+                vars[i].default = myname
+            if var.name in ['hudson_irc_channels']:
+                vars[i].default = '#%s' % (myname)
+        return vars                     
+
+    def pre(self, command, output_dir, vars):
+        tomcat.TomcatAppBaseTemplate.pre(self, command, output_dir, vars)
+        vars['hudson_email_from'] = vars['hudson_email_from'].replace('<', '&lt;').replace('>', '&gt;')
+        vars['hudson_home'] = os.path.join(
+            vars['sys'], 'var', 'data', 'hudson',
+            vars['tomcat_instance'], vars['webapp_name']
+        )
 
     def post(self, command, output_dir, vars):
         tomcat.TomcatAppBaseTemplate.post(self, command, output_dir, vars)
         # symlink conf, and logs directories inside $sys
         README = '%s'% (
             "-------------------------------------------------------------------------------------------------------\n"
-            " * It's your job to CONFIGURE CAS TO USE ANOTHER BACKEND FOR PASSWORDS !\n"
+            " * hudson home has been set in web.xml with value: %s!\n"
             "-------------------------------------------------------------------------------------------------------\n"
-        )
+        % (vars['hudson_home']) )
         readmep = os.path.join(vars['path'], 'README.tomcat.%s_%s' % (self.webapp_type, vars['webapp_name']))
         print README
         print "Those informations have been savec in %s" % readmep
         open(readmep, 'w').write(README)
 
-# vim:set et sts=4 ts=4 tw=80:
+# vim:set et sts=4 ts=4 tw=0:

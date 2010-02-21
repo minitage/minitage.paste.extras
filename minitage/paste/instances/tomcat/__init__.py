@@ -225,15 +225,15 @@ class Template(common.Template):
 
 def get_tomcat_config_path(self, vars):
     path = os.path.join(
-        vars['sys'], 
+        vars['sys'],
         'var', 'data', 'tomcat', 'tomcats.cfg'
-    ) 
+    )
     return path
 
 Template.required_templates = ['minitage.instances.env']
 gid = pwd.getpwnam(running_user)[3]
 #group = grp.getgrgid(gid)[0]
-Template.vars = common.Template.vars + Template.tomcat_vars + ssl.SSL_VARS  
+Template.vars = common.Template.vars + Template.tomcat_vars + ssl.SSL_VARS
 
 
 class TomcatAppBaseTemplate(common.Template):
@@ -260,7 +260,7 @@ class TomcatAppBaseTemplate(common.Template):
         path = get_tomcat_config_path(self, vars)
         config = ConfigParser.ConfigParser()
         if os.path.exists(path):
-            config.read(path)        
+            config.read(path)
             for o in  config.options(vars['tomcat_instance']):
                 vars[o] = config.get(vars['tomcat_instance'], o)
         else:
