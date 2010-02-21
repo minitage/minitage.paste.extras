@@ -6,7 +6,7 @@ setupdir = os.path.abspath(
 os.chdir(setupdir)
 
 name='minitage.paste.extras'
-version = '1.11'
+version = '1.12'
 
 def read(rnames):
     return open(
@@ -17,6 +17,7 @@ setup(
     name=name,
     version=version,
     description='Extension for minitage.paste allowing users to have some server instaces configured on top of projects',
+    download_url='http://distfiles.minitage.org/public/externals/minitage/',
     long_description= (
         read('README.txt')
         + '\n' +
