@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: ckutz
+Build-Jdk: 1.6.0_16
+Extension-Name: ircbot
+Specification-Title: A Build status publisher that notifies channels o
+ n a IRC server
+Implementation-Title: ircbot
+Implementation-Version: 2.1
+Plugin-Class: hudson.plugins.ircbot.PluginImpl
+Short-Name: ircbot
+Long-Name: Hudson IRC Plugin
+Url: http://wiki.hudson-ci.org/display/HUDSON/IRC+Plugin
+Plugin-Version: 2.1
+Hudson-Version: 1.327
+Plugin-Dependencies: instant-messaging:1.4,maven-plugin:1.327
+Plugin-Developers: Christoph Kutzinski:kutzi:kutzi@gmx.de
+

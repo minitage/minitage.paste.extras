@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson.tasks.Mailer_-DescriptorImpl>
+  <hudsonUrl>$hudson_url</hudsonUrl>
+  <adminAddress>$hudson_email_from</adminAddress>
+  <useSsl>false</useSsl>
+</hudson.tasks.Mailer_-DescriptorImpl>

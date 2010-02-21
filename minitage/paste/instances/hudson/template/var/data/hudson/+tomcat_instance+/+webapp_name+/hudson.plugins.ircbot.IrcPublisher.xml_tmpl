@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson.plugins.ircbot.IrcPublisher_-DescriptorImpl>
+  <enabled>$hudson_irc_support</enabled>
+  <hostname>$hudson_irc_server</hostname>
+  <port>$hudson_irc_port</port>
+  <password></password>
+  <nick>$hudson_irc_nick</nick>
+  <channels class="java.util.Arrays\$ArrayList">
+    <a class="string-array">
+      <string>$hudson_irc_channels</string>
+    </a>
+  </channels>
+  <commandPrefix>!hudson</commandPrefix>
+  <hudsonLogin>$hudson_irc_nick</hudsonLogin>
+  <hudsonPassword></hudsonPassword>
+  <useNotice>false</useNotice>
+</hudson.plugins.ircbot.IrcPublisher_-DescriptorImpl>

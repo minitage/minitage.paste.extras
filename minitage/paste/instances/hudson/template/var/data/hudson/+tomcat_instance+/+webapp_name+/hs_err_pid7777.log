@@ -1,0 +1,503 @@
+#
+# An unexpected error has been detected by HotSpot Virtual Machine:
+#
+#  SIGSEGV (0xb) at pc=0x8cc313d6, pid=7777, tid=2267020176
+#
+# Java VM: Java HotSpot(TM) Server VM (1.5.0_20-b02 mixed mode)
+# Problematic frame:
+# C  [libapr-1.so.0+0x183d6]
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x083fd140):  JavaThread "http-8080-5" daemon [_thread_in_native, id=7920]
+
+siginfo:si_signo=11, si_errno=0, si_code=1, si_addr=0x121700b6
+
+Registers:
+EAX=0x121700b6, EBX=0x8cc43ff4, ECX=0x8c523d18, EDX=0x00000000
+ESP=0x871fec8c, EBP=0x871fecb4, ESI=0x08cee6f8, EDI=0x08cee718
+EIP=0x8cc313d6, CR2=0x121700b6, EFLAGS=0x00010202
+
+Top of Stack: (sp=0x871fec8c)
+0x871fec8c:   00000000 871fecb4 8de17c08 121700b6
+0x871fec9c:   084975c8 08585d70 8c5256c8 8c5efa50
+0x871fecac:   00000000 8cc43ff4 871fece4 8cc31b14
+0x871fecbc:   8c523d18 121700b6 871fece4 8cc37dea
+0x871feccc:   08cee6b8 08cee718 08cee6a0 8c523d18
+0x871fecdc:   00000000 8cc62ff4 871fed04 8cc598e2
+0x871fecec:   08cee6b8 08cee6f8 8cc597b0 8de9df40
+0x871fecfc:   8de9df40 083fd140 871fed38 b139b898 
+
+Instructions: (pc=0x8cc313d6)
+0x8cc313c6:   04 89 45 f4 8b 45 08 8b 40 08 89 45 f8 8b 45 0c
+0x8cc313d6:   8b 00 89 45 e4 8b 45 0c 8b 40 08 89 45 ec 83 7d 
+
+Stack: [0x8717f000,0x87200000),  sp=0x871fec8c,  free space=511k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [libapr-1.so.0+0x183d6]
+C  [libapr-1.so.0+0x18b14]  apr_pool_destroy+0x11e
+C  [libtcnative-1.so.0.1.20+0x148e2]  Java_org_apache_tomcat_jni_Socket_destroy+0x72
+j  org.apache.tomcat.jni.Socket.destroy(J)V+0
+j  org.apache.tomcat.util.net.AprEndpoint$Worker.run()V+159
+j  java.lang.Thread.run()V+11
+v  ~StubRoutines::call_stub
+V  [libjvm.so+0x269e0c]
+V  [libjvm.so+0x43b068]
+V  [libjvm.so+0x269665]
+V  [libjvm.so+0x2696fe]
+V  [libjvm.so+0x2e16c5]
+V  [libjvm.so+0x4dbdc3]
+V  [libjvm.so+0x43bc78]
+C  [libpthread.so.0+0x519b]
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  org.apache.tomcat.jni.Socket.destroy(J)V+0
+j  org.apache.tomcat.util.net.AprEndpoint$Worker.run()V+159
+j  java.lang.Thread.run()V+11
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x8c233040 JavaThread "DestroyJavaVM" [_thread_blocked, id=7777]
+  0x083fcfb8 JavaThread "http-8080-6" daemon [_thread_blocked, id=7930]
+=>0x083fd140 JavaThread "http-8080-5" daemon [_thread_in_native, id=7920]
+  0x08400d78 JavaThread "http-8080-4" daemon [_thread_blocked, id=7919]
+  0x08330dc8 JavaThread "http-8080-3" daemon [_thread_blocked, id=7916]
+  0x08221410 JavaThread "com.google.common.base.internal.Finalizer" daemon [_thread_blocked, id=7883]
+  0x085fbc78 JavaThread "http-8080-2" daemon [_thread_blocked, id=7882]
+  0x0897f620 JavaThread "http-8080-1" daemon [_thread_blocked, id=7881]
+  0x081f0bd0 JavaThread "pool-4-thread-1" [_thread_blocked, id=7880]
+  0x081f1648 JavaThread "IM-Reconnector-Thread" daemon [_thread_blocked, id=7879]
+  0x899dbdd0 JavaThread "ajp-8009-Acceptor-0" daemon [_thread_in_native, id=7873]
+  0x8992b238 JavaThread "ajp-8009-CometPoller-0" daemon [_thread_blocked, id=7872]
+  0x8a03a1f8 JavaThread "ajp-8009-Poller-0" daemon [_thread_blocked, id=7871]
+  0x8a03b560 JavaThread "http-8443-Acceptor-0" daemon [_thread_in_native, id=7870]
+  0x8c257ae8 JavaThread "http-8443-CometPoller-0" daemon [_thread_blocked, id=7869]
+  0x89940d00 JavaThread "http-8443-Poller-0" daemon [_thread_blocked, id=7868]
+  0x8a03a998 JavaThread "http-8080-Sendfile-0" daemon [_thread_blocked, id=7866]
+  0x8a0ca320 JavaThread "http-8080-CometPoller-0" daemon [_thread_blocked, id=7865]
+  0x8a0432e8 JavaThread "http-8080-Poller-0" daemon [_thread_blocked, id=7864]
+  0x8a0d87a8 JavaThread "Java2D Disposer" daemon [_thread_blocked, id=7861]
+  0x8d4afcf0 JavaThread "Low Memory Detector" daemon [_thread_blocked, id=7859]
+  0x8d4ae910 JavaThread "CompilerThread1" daemon [_thread_blocked, id=7858]
+  0x8d4ad990 JavaThread "CompilerThread0" daemon [_thread_blocked, id=7857]
+  0x8d4ac9e0 JavaThread "AdapterThread" daemon [_thread_blocked, id=7856]
+  0x8d4abb78 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=7855]
+  0x8d4a24f0 JavaThread "Finalizer" daemon [_thread_blocked, id=7854]
+  0x8d4a1fc8 JavaThread "Reference Handler" daemon [_thread_blocked, id=7853]
+
+Other Threads:
+  0x8d49fcd8 VMThread [id=7852]
+  0x8d4b1898 WatcherThread [id=7860]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap
+ PSYoungGen      total 54976K, used 15150K [0xadaa0000, 0xb12d0000, 0xb12d0000)
+  eden space 52672K, 25% used [0xadaa0000,0xae7fe568,0xb0e10000)
+  from space 2304K, 63% used [0xb1050000,0xb11bd298,0xb1290000)
+  to   space 2304K, 0% used [0xb0e10000,0xb0e10000,0xb1050000)
+ PSOldGen        total 28800K, used 16510K [0x918d0000, 0x934f0000, 0xadaa0000)
+  object space 28800K, 57% used [0x918d0000,0x928efb90,0x934f0000)
+ PSPermGen       total 20224K, used 20210K [0x8d8d0000, 0x8ec90000, 0x918d0000)
+  object space 20224K, 99% used [0x8d8d0000,0x8ec8cb20,0x8ec90000)
+
+Dynamic libraries:
+08048000-08057000 r-xp 00000000 08:06 339069722  /opt/sun-jdk-1.5.0.20/bin/java
+08057000-08059000 rwxp 0000e000 08:06 339069722  /opt/sun-jdk-1.5.0.20/bin/java
+08059000-08f6e000 rwxp 08059000 00:00 0          [heap]
+86400000-86600000 rwxp 86400000 00:00 0 
+86600000-8662b000 rwxp 86600000 00:00 0 
+8662b000-86700000 ---p 8662b000 00:00 0 
+86700000-86800000 rwxp 86700000 00:00 0 
+86800000-86900000 rwxp 86800000 00:00 0 
+86a00000-86afa000 rwxp 86a00000 00:00 0 
+86afa000-86b00000 ---p 86afa000 00:00 0 
+86c00000-86cff000 rwxp 86c00000 00:00 0 
+86cff000-86d00000 ---p 86cff000 00:00 0 
+86e00000-87000000 rwxp 86e00000 00:00 0 
+87000000-870fb000 rwxp 87000000 00:00 0 
+870fb000-87100000 ---p 870fb000 00:00 0 
+8717f000-87182000 ---p 8717f000 00:00 0 
+87182000-87200000 rwxp 87182000 00:00 0 
+87200000-872f7000 rwxp 87200000 00:00 0 
+872f7000-87300000 ---p 872f7000 00:00 0 
+87300000-873fc000 rwxp 87300000 00:00 0 
+873fc000-87400000 ---p 873fc000 00:00 0 
+87400000-874f6000 rwxp 87400000 00:00 0 
+874f6000-87500000 ---p 874f6000 00:00 0 
+87500000-875f9000 rwxp 87500000 00:00 0 
+875f9000-87600000 ---p 875f9000 00:00 0 
+8767f000-87682000 ---p 8767f000 00:00 0 
+87682000-87700000 rwxp 87682000 00:00 0 
+87700000-877ed000 rwxp 87700000 00:00 0 
+877ed000-87800000 ---p 877ed000 00:00 0 
+8787f000-87882000 ---p 8787f000 00:00 0 
+87882000-87900000 rwxp 87882000 00:00 0 
+87900000-879f2000 rwxp 87900000 00:00 0 
+879f2000-87a00000 ---p 879f2000 00:00 0 
+87a00000-87b00000 rwxp 87a00000 00:00 0 
+87b00000-87bfb000 rwxp 87b00000 00:00 0 
+87bfb000-87c00000 ---p 87bfb000 00:00 0 
+87c6e000-87c71000 ---p 87c6e000 00:00 0 
+87c71000-87cef000 rwxp 87c71000 00:00 0 
+87d3c000-87d3f000 rwxp 87d3c000 00:00 0 
+87d3f000-87dbd000 rwxp 87d3f000 00:00 0 
+87dbd000-87dc0000 ---p 87dbd000 00:00 0 
+87dc0000-87e3e000 rwxp 87dc0000 00:00 0 
+87e3e000-88000000 r-xs 00000000 08:08 1347135    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/subversion/WEB-INF/lib/svnkit-1.3.0-hudson-2.jar (deleted)
+88000000-880fc000 rwxp 88000000 00:00 0 
+880fc000-88100000 ---p 880fc000 00:00 0 
+8817f000-88182000 rwxp 8817f000 00:00 0 
+88182000-88200000 rwxp 88182000 00:00 0 
+88200000-882fb000 rwxp 88200000 00:00 0 
+882fb000-88300000 ---p 882fb000 00:00 0 
+88300000-883fd000 rwxp 88300000 00:00 0 
+883fd000-88400000 ---p 883fd000 00:00 0 
+88400000-884ef000 rwxp 88400000 00:00 0 
+884ef000-88500000 ---p 884ef000 00:00 0 
+8857d000-88580000 ---p 8857d000 00:00 0 
+88580000-885fe000 rwxp 88580000 00:00 0 
+885fe000-88601000 rwxp 885fe000 00:00 0 
+88601000-8867f000 rwxp 88601000 00:00 0 
+8867f000-88682000 rwxp 8867f000 00:00 0 
+88682000-88700000 rwxp 88682000 00:00 0 
+88700000-887fe000 rwxp 88700000 00:00 0 
+887fe000-88800000 ---p 887fe000 00:00 0 
+8887f000-88882000 rwxp 8887f000 00:00 0 
+88882000-88900000 rwxp 88882000 00:00 0 
+88900000-889ff000 rwxp 88900000 00:00 0 
+889ff000-88a00000 ---p 889ff000 00:00 0 
+88a7e000-88a81000 ---p 88a7e000 00:00 0 
+88a81000-88aff000 rwxp 88a81000 00:00 0 
+88aff000-88b02000 rwxp 88aff000 00:00 0 
+88b02000-88b80000 rwxp 88b02000 00:00 0 
+88bb8000-88bbb000 rwxp 88bb8000 00:00 0 
+88bbb000-88c39000 rwxp 88bbb000 00:00 0 
+88c7d000-88c80000 ---p 88c7d000 00:00 0 
+88c80000-88cfe000 rwxp 88c80000 00:00 0 
+88cfe000-88d01000 ---p 88cfe000 00:00 0 
+88d01000-88d7f000 rwxp 88d01000 00:00 0 
+88d7f000-88d82000 ---p 88d7f000 00:00 0 
+88d82000-88e00000 rwxp 88d82000 00:00 0 
+88e00000-88ee8000 rwxp 88e00000 00:00 0 
+88ee8000-88f00000 ---p 88ee8000 00:00 0 
+88f11000-88f21000 r-xp 00000000 08:06 107680766  /lib/libresolv-2.9.so
+88f21000-88f22000 r-xp 00010000 08:06 107680766  /lib/libresolv-2.9.so
+88f22000-88f23000 rwxp 00011000 08:06 107680766  /lib/libresolv-2.9.so
+88f23000-88f25000 rwxp 88f23000 00:00 0 
+88f25000-88f29000 r-xp 00000000 08:06 107680767  /lib/libnss_dns-2.9.so
+88f29000-88f2a000 r-xp 00003000 08:06 107680767  /lib/libnss_dns-2.9.so
+88f2a000-88f2b000 rwxp 00004000 08:06 107680767  /lib/libnss_dns-2.9.so
+88f54000-88f67000 r-xs 00000000 08:08 1599073    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/ircbot/WEB-INF/lib/pircbot-1.4.6.jar (deleted)
+88f67000-88f6a000 r-xs 00000000 08:08 1419937    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/maven-monitor-2.0.9.jar (deleted)
+88f6a000-88f71000 r-xs 00000000 08:08 1420001    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/wagon-ssh-common-1.0-beta-2.jar (deleted)
+88f71000-88f75000 r-xs 00000000 08:08 1419884    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/wagon-http-lightweight-1.0-beta-2.jar (deleted)
+88f75000-88f7f000 r-xs 00000000 08:08 1419780    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/classworlds-1.1.jar (deleted)
+88f7f000-88f82000 ---p 88f7f000 00:00 0 
+88f82000-89000000 rwxp 88f82000 00:00 0 
+89000000-890e8000 rwxp 89000000 00:00 0 
+890e8000-89100000 ---p 890e8000 00:00 0 
+89102000-89108000 r-xs 00000000 08:08 1419729    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/maven-repository-metadata-2.0.9.jar (deleted)
+89108000-8910e000 r-xs 00000000 08:08 1419870    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/maven-interceptor-1.346.jar (deleted)
+8910e000-8911a000 r-xs 00000000 08:08 1419881    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/wagon-provider-api-1.0-beta-2.jar (deleted)
+8911a000-8911e000 r-xs 00000000 08:08 1419946    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/maven-error-diagnostics-2.0.9.jar (deleted)
+8911e000-89134000 r-xs 00000000 08:08 1419849    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/maven-artifact-2.0.9.jar (deleted)
+89134000-8915b000 r-xs 00000000 08:08 1419799    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/maven-core-2.0.9.jar (deleted)
+8915b000-8915e000 ---p 8915b000 00:00 0 
+8915e000-891dc000 rwxp 8915e000 00:00 0 
+891de000-891fc000 r-xs 00000000 08:08 1419873    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/jsch-0.1.27.jar (deleted)
+891fc000-891ff000 ---p 891fc000 00:00 0 
+891ff000-8927d000 rwxp 891ff000 00:00 0 
+8927d000-89280000 ---p 8927d000 00:00 0 
+89280000-892fe000 rwxp 89280000 00:00 0 
+892fe000-89301000 rwxp 892fe000 00:00 0 
+89301000-8937f000 rwxp 89301000 00:00 0 
+8937f000-89382000 ---p 8937f000 00:00 0 
+89382000-89400000 rwxp 89382000 00:00 0 
+89400000-894e7000 rwxp 89400000 00:00 0 
+894e7000-89500000 ---p 894e7000 00:00 0 
+89501000-89531000 r-xs 00000000 08:08 1420026    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/plexus-container-default-1.0-alpha-9-stable-1.jar (deleted)
+89531000-8957d000 r-xs 00000000 08:08 1419653    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/commons-httpclient-3.1-rc1.jar (deleted)
+8957d000-89580000 ---p 8957d000 00:00 0 
+89580000-895fe000 rwxp 89580000 00:00 0 
+895fe000-89601000 ---p 895fe000 00:00 0 
+89601000-8967f000 rwxp 89601000 00:00 0 
+8967f000-89682000 rwxp 8967f000 00:00 0 
+89682000-89700000 rwxp 89682000 00:00 0 
+89700000-897f5000 rwxp 89700000 00:00 0 
+897f5000-89800000 ---p 897f5000 00:00 0 
+89800000-89900000 rwxp 89800000 00:00 0 
+89900000-899dc000 rwxp 89900000 00:00 0 
+899dc000-89a00000 ---p 899dc000 00:00 0 
+89a03000-89a0b000 r-xs 00000000 08:08 1419680    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/maven-plugin-registry-2.0.9.jar (deleted)
+89a0b000-89a1a000 r-xs 00000000 08:08 1420067    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/maven-artifact-manager-2.0.9.jar (deleted)
+89a1a000-89a45000 r-xs 00000000 08:08 1420078    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/slide-webdavlib-2.1.jar (deleted)
+89aea000-89b64000 r-xp 00000000 08:06 40481437   /opt/sun-jdk-1.5.0.20/jre/lib/i386/libfontmanager.so
+89b64000-89b6e000 rwxp 0007a000 08:06 40481437   /opt/sun-jdk-1.5.0.20/jre/lib/i386/libfontmanager.so
+89b6e000-89b72000 rwxp 89b6e000 00:00 0 
+89b75000-89b7f000 r-xs 00000000 08:08 1419590    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/maven-plugin-descriptor-2.0.9.jar (deleted)
+89b7f000-89b82000 ---p 89b7f000 00:00 0 
+89b82000-89c00000 rwxp 89b82000 00:00 0 
+89c00000-89cfd000 rwxp 89c00000 00:00 0 
+89cfd000-89d00000 ---p 89cfd000 00:00 0 
+89d02000-89d06000 r-xs 00000000 08:08 1419704    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/wagon-webdav-1.0-beta-2-hudson-1.jar (deleted)
+89d06000-89d08000 r-xs 00000000 08:08 1419776    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/maven2.1-interceptor-1.2.jar (deleted)
+89d08000-89d0e000 r-xs 00000000 08:08 1419730    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/maven-embedder-2.0.4.jar (deleted)
+89d0e000-89d12000 r-xs 00000000 08:08 1419686    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/maven-plugin-api-2.0.9.jar (deleted)
+89d12000-89d15000 r-xs 00000000 08:08 1419596    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/wagon-file-1.0-beta-2.jar (deleted)
+89d15000-89d1b000 r-xs 00000000 08:08 1419735    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/maven-plugin-parameter-documenter-2.0.9.jar (deleted)
+89d1b000-89d39000 r-xs 00000000 08:08 1419953    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/maven-project-2.0.9.jar (deleted)
+89d39000-89dff000 r-xp 00000000 08:06 40481433   /opt/sun-jdk-1.5.0.20/jre/lib/i386/libmlib_image.so
+89dff000-89e00000 rwxp 000c5000 08:06 40481433   /opt/sun-jdk-1.5.0.20/jre/lib/i386/libmlib_image.so
+89e00000-89efe000 rwxp 89e00000 00:00 0 
+89efe000-89f00000 ---p 89efe000 00:00 0 
+89f00000-89f04000 r-xs 00000000 08:08 1420034    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/plexus-interactivity-api-1.0-alpha-4.jar (deleted)
+89f04000-89f0c000 r-xs 00000000 08:08 1419956    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/commons-codec-1.2.jar (deleted)
+89f0c000-89f6b000 r-xp 00000000 08:06 40481434   /opt/sun-jdk-1.5.0.20/jre/lib/i386/libawt.so
+89f6b000-89f71000 rwxp 0005f000 08:06 40481434   /opt/sun-jdk-1.5.0.20/jre/lib/i386/libawt.so
+89f71000-89f95000 rwxp 89f71000 00:00 0 
+8a000000-8a0fd000 rwxp 8a000000 00:00 0 
+8a0fd000-8a100000 ---p 8a0fd000 00:00 0 
+8a100000-8a103000 r-xs 00000000 08:08 1419897    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/wagon-http-shared-1.0-beta-2.jar (deleted)
+8a103000-8a106000 r-xs 00000000 08:08 1419765    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/maven-reporting-api-2.0.9.jar (deleted)
+8a106000-8a110000 r-xs 00000000 08:08 1419996    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/commons-logging-1.0.4.jar (deleted)
+8a110000-8a114000 r-xs 00000000 08:08 1419804    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/wagon-ssh-external-1.0-beta-2.jar (deleted)
+8a114000-8a11d000 r-xs 00000000 08:08 1419813    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/maven-profile-2.0.9.jar (deleted)
+8a11d000-8a133000 r-xs 00000000 08:08 1419876    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/maven-model-2.0.9.jar (deleted)
+8a133000-8a167000 r-xs 00000000 08:08 1419669    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/plexus-utils-1.5.1.jar (deleted)
+8a646000-8ab03000 r-xs 00000000 08:08 1345064    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/tomcat/mcbuildbot/webapps/hudson/WEB-INF/lib/hudson-core-1.346.jar (deleted)
+8ab04000-8ab07000 r-xs 00000000 08:08 1419805    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/maven-agent-1.346.jar (deleted)
+8ab07000-8ab0d000 r-xs 00000000 08:08 1419960    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/xml-im-exporter-1.1.jar (deleted)
+8ab0d000-8ab19000 r-xs 00000000 08:08 1419790    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/maven-settings-2.0.9.jar (deleted)
+8ab19000-8ab2b000 r-xp 00000000 08:06 40481426   /opt/sun-jdk-1.5.0.20/jre/lib/i386/libnet.so
+8ab2b000-8ab2c000 rwxp 00011000 08:06 40481426   /opt/sun-jdk-1.5.0.20/jre/lib/i386/libnet.so
+8aebf000-8af4d000 r-xs 00000000 08:08 1345061    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/tomcat/mcbuildbot/webapps/hudson/WEB-INF/lib/google-collections-1.0-rc3.jar (deleted)
+8b03d000-8b065000 r-xs 00000000 08:08 1345049    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/tomcat/mcbuildbot/webapps/hudson/WEB-INF/lib/commons-jelly-1.1-hudson-20100211.jar (deleted)
+8b0c5000-8b0c8000 rwxp 8b0c5000 00:00 0 
+8b0c8000-8b146000 rwxp 8b0c8000 00:00 0 
+8b400000-8b4fe000 rwxp 8b400000 00:00 0 
+8b4fe000-8b500000 ---p 8b4fe000 00:00 0 
+8b501000-8b504000 r-xs 00000000 08:08 1419594    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/doxia-sink-api-1.0-alpha-10.jar (deleted)
+8b504000-8b515000 r-xs 00000000 08:08 1345207    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/tomcat/mcbuildbot/webapps/hudson/WEB-INF/lib/stapler-jelly-1.133.jar (deleted)
+8b548000-8b55b000 r-xs 00000000 08:06 149388771  /var/cache/fontconfig/4b5cf4386f1cde02a336ba961b4ac82d-x86.cache-2
+8b55c000-8b562000 r-xs 00000000 08:08 1419868    /home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/hudson/mcbuildbot/hudson/plugins/maven-plugin/WEB-INF/lib/wagon-ssh-1.0-beta-2.jar (deleted)
+8b600000-8b700000 rwxp 8b600000 00:00 0 
+8b800000-8b9fc000 rwxp 8b800000 00:00 0 
+8b9fc000-8ba00000 ---p 8b9fc000 00:00 0 
+8ba00000-8bc00000 rwxp 8ba00000 00:00 0 
+8bc00000-8be00000 rwxp 8bc00000 00:00 0 
+8be00000-8bf00000 rwxp 8be00000 00:00 0 
+8bf00000-8bf0d000 r-xs 00000000 08:06 149007751  /var/cache/fontconfig/221fd1126b80b777db535aea535e87ba-x86.cache-2
+8c000000-8c0fd000 rwxp 8c000000 00:00 0 
+8c0fd000-8c100000 ---p 8c0fd000 00:00 0 
+8c200000-8c2ff000 rwxp 8c200000 00:00 0 
+8c2ff000-8c300000 ---p 8c2ff000 00:00 0 
+8c303000-8c309000 r-xs 00000000 08:06 149388774  /var/cache/fontconfig/87f5e051180a7a75f16eb6fe7dbd3749-x86.cache-2
+8c329000-8c32c000 ---p 8c329000 00:00 0 
+8c32c000-8c3aa000 rwxp 8c32c000 00:00 0 
+8c3aa000-8c4e6000 r-xp 00000000 08:08 1645722    /home/kiorky/minitage/dependencies/openssl-0.9/parts/part/lib/libcrypto.so.0.9.8
+8c4e6000-8c4ee000 r-xp 0013b000 08:08 1645722    /home/kiorky/minitage/dependencies/openssl-0.9/parts/part/lib/libcrypto.so.0.9.8
+8c4ee000-8c4fc000 rwxp 00143000 08:08 1645722    /home/kiorky/minitage/dependencies/openssl-0.9/parts/part/lib/libcrypto.so.0.9.8
+8c4fc000-8c500000 rwxp 8c4fc000 00:00 0 
+8c500000-8c5f2000 rwxp 8c500000 00:00 0 
+8c5f2000-8c600000 ---p 8c5f2000 00:00 0 
+8c600000-8c606000 r-xs 00000000 08:06 149007752  /var/cache/fontconfig/acc285bc1956c3c4bc7afb41d537a85a-x86.cache-2
+8c606000-8c609000 r-xs 00000000 08:06 149007750  /var/cache/fontconfig/ca4159d61fb2875b0ab42f781546c4f4-x86.cache-2
+8c609000-8c610000 r-xs 00000000 08:06 149007749  /var/cache/fontconfig/12b26b760a24f8b4feb03ad48a333a72-x86.cache-2
+8c610000-8c615000 r-xs 00000000 08:06 149388769  /var/cache/fontconfig/d62e99ef547d1d24cdb1bd22ec1a2976-x86.cache-2
+8c615000-8c61a000 r-xp 00000000 08:06 235749795  /opt/sun-jdk-1.5.0.20/jre/lib/i386/headless/libmawt.so
+8c61a000-8c61b000 rwxp 00005000 08:06 235749795  /opt/sun-jdk-1.5.0.20/jre/lib/i386/headless/libmawt.so
+8c61b000-8c624000 r-xp 00000000 08:06 107680751  /lib/libcrypt-2.9.so
+8c624000-8c625000 r-xp 00008000 08:06 107680751  /lib/libcrypt-2.9.so
+8c625000-8c626000 rwxp 00009000 08:06 107680751  /lib/libcrypt-2.9.so
+8c626000-8c64d000 rwxp 8c626000 00:00 0 
+8c64d000-8c650000 r-xp 00000000 08:06 107680749  /lib/libuuid.so.1.3.0
+8c650000-8c651000 r-xp 00002000 08:06 107680749  /lib/libuuid.so.1.3.0
+8c651000-8c652000 rwxp 00003000 08:06 107680749  /lib/libuuid.so.1.3.0
+8c652000-8c657000 r-xs 00000000 08:06 149007744  /var/cache/fontconfig/f349e9996a5320f6dd491cedd2b1f964-x86.cache-2
+8c67b000-8c6be000 r-xp 00000000 08:08 1645725    /home/kiorky/minitage/dependencies/openssl-0.9/parts/part/lib/libssl.so.0.9.8
+8c6be000-8c6bf000 r-xp 00043000 08:08 1645725    /home/kiorky/minitage/dependencies/openssl-0.9/parts/part/lib/libssl.so.0.9.8
+8c6bf000-8c6c2000 rwxp 00044000 08:08 1645725    /home/kiorky/minitage/dependencies/openssl-0.9/parts/part/lib/libssl.so.0.9.8
+8c6c2000-8c742000 r-xs 00000000 08:08 1820283    /home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/lib/jasper.jar
+8c742000-8c750000 r-xs 00000000 08:08 1820276    /home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/lib/tomcat-i18n-ja.jar
+8c750000-8c770000 r-xs 00000000 08:08 1820289    /home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/lib/catalina-ha.jar
+8c770000-8c786000 r-xs 00000000 08:08 1820281    /home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/lib/servlet-api.jar
+8c786000-8c840000 r-xs 00000000 08:08 1820280    /home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/lib/tomcat-coyote.jar
+8c840000-8c84e000 r-xs 00000000 08:08 1820290    /home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/lib/catalina-ant.jar
+8c84e000-8c96f000 r-xs 00000000 08:08 1820287    /home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/lib/catalina.jar
+8c96f000-8c9a8000 r-xs 00000000 08:08 1820279    /home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/lib/tomcat-dbcp.jar
+8c9a8000-8cb00000 r-xs 00000000 08:08 1820284    /home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/lib/jasper-jdt.jar
+8cb00000-8cc00000 rwxp 8cb00000 00:00 0 
+8cc02000-8cc04000 r-xs 00000000 08:06 149388789  /var/cache/fontconfig/76fa4b957c916922374347f144bde9da-x86.cache-2
+8cc10000-8cc17000 r-xp 00000000 08:06 107706734  /lib/librt-2.9.so
+8cc17000-8cc18000 r-xp 00006000 08:06 107706734  /lib/librt-2.9.so
+8cc18000-8cc19000 rwxp 00007000 08:06 107706734  /lib/librt-2.9.so
+8cc19000-8cc43000 r-xp 00000000 08:08 1646074    /home/kiorky/minitage/dependencies/apr-1.3/parts/part/lib/libapr-1.so.0.3.9
+8cc43000-8cc44000 r-xp 00029000 08:08 1646074    /home/kiorky/minitage/dependencies/apr-1.3/parts/part/lib/libapr-1.so.0.3.9
+8cc44000-8cc45000 rwxp 0002a000 08:08 1646074    /home/kiorky/minitage/dependencies/apr-1.3/parts/part/lib/libapr-1.so.0.3.9
+8cc45000-8cc62000 r-xp 00000000 08:08 1821174    /home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/lib/libtcnative-1.so.0.1.20
+8cc62000-8cc63000 r-xp 0001c000 08:08 1821174    /home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/lib/libtcnative-1.so.0.1.20
+8cc63000-8cc64000 rwxp 0001d000 08:08 1821174    /home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/lib/libtcnative-1.so.0.1.20
+8cc64000-8cc6c000 r-xs 00000000 08:08 1820286    /home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/lib/el-api.jar
+8cc6c000-8cc7f000 r-xs 00000000 08:08 1820282    /home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/lib/jsp-api.jar
+8cc7f000-8ccb9000 r-xs 00000000 08:08 1820288    /home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/lib/catalina-tribes.jar
+8ccb9000-8ccc6000 r-xs 00000000 08:08 1820277    /home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/lib/tomcat-i18n-fr.jar
+8ccc6000-8cccc000 r-xp 00000000 08:06 40481428   /opt/sun-jdk-1.5.0.20/jre/lib/i386/libmanagement.so
+8cccc000-8cccd000 rwxp 00005000 08:06 40481428   /opt/sun-jdk-1.5.0.20/jre/lib/i386/libmanagement.so
+8cccd000-8ccd4000 r-xs 00000000 08:08 1820304    /home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/bin/tomcat-juli.jar
+8ccd4000-8ccd7000 r-xs 00000000 08:08 1820311    /home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/bin/commons-daemon.jar
+8ccd7000-8ccdd000 r-xs 00000000 08:08 1820314    /home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/bin/bootstrap.jar
+8ccdd000-8cda3000 r-xs 00000000 08:06 269279827  /opt/sun-jdk-1.5.0.20/jre/lib/ext/localedata.jar
+8cda3000-8cda6000 r-xs 00000000 08:06 269279815  /opt/sun-jdk-1.5.0.20/jre/lib/ext/dnsns.jar
+8cda6000-8cdd1000 r-xs 00000000 08:06 269279765  /opt/sun-jdk-1.5.0.20/jre/lib/ext/sunpkcs11.jar
+8cdd1000-8cdf8000 r-xs 00000000 08:06 269279745  /opt/sun-jdk-1.5.0.20/jre/lib/ext/sunjce_provider.jar
+8cdf8000-8cdf9000 ---p 8cdf8000 00:00 0 
+8cdf9000-8ce79000 rwxp 8cdf9000 00:00 0 
+8ce79000-8ce7c000 ---p 8ce79000 00:00 0 
+8ce7c000-8cefa000 rwxp 8ce7c000 00:00 0 
+8cefa000-8cefd000 ---p 8cefa000 00:00 0 
+8cefd000-8cf7b000 rwxp 8cefd000 00:00 0 
+8cf7b000-8cf7e000 ---p 8cf7b000 00:00 0 
+8cf7e000-8cffc000 rwxp 8cf7e000 00:00 0 
+8cffc000-8cfff000 ---p 8cffc000 00:00 0 
+8cfff000-8d07d000 rwxp 8cfff000 00:00 0 
+8d07d000-8d080000 ---p 8d07d000 00:00 0 
+8d080000-8d0fe000 rwxp 8d080000 00:00 0 
+8d0fe000-8d2fe000 r-xp 00000000 08:06 411808295  /usr/lib/locale/locale-archive
+8d2fe000-8d301000 ---p 8d2fe000 00:00 0 
+8d301000-8d37f000 rwxp 8d301000 00:00 0 
+8d37f000-8d382000 ---p 8d37f000 00:00 0 
+8d382000-8d400000 rwxp 8d382000 00:00 0 
+8d400000-8d500000 rwxp 8d400000 00:00 0 
+8d501000-8d51c000 r-xs 00000000 08:08 1820285    /home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/lib/jasper-el.jar
+8d51c000-8d52e000 r-xs 00000000 08:08 1820278    /home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/lib/tomcat-i18n-es.jar
+8d52e000-8d52f000 ---p 8d52e000 00:00 0 
+8d52f000-8d5af000 rwxp 8d52f000 00:00 0 
+8d5af000-8d5b0000 ---p 8d5af000 00:00 0 
+8d5b0000-8d630000 rwxp 8d5b0000 00:00 0 
+8d630000-8d631000 ---p 8d630000 00:00 0 
+8d631000-8d6bb000 rwxp 8d631000 00:00 0 
+8d6bb000-8d6d1000 rwxp 8d6bb000 00:00 0 
+8d6d1000-8d6e0000 rwxp 8d6d1000 00:00 0 
+8d6e0000-8d7b2000 rwxp 8d6e0000 00:00 0 
+8d7b2000-8d7bc000 rwxp 8d7b2000 00:00 0 
+8d7bc000-8d7d2000 rwxp 8d7bc000 00:00 0 
+8d7d2000-8d7e1000 rwxp 8d7d2000 00:00 0 
+8d7e1000-8d8b2000 rwxp 8d7e1000 00:00 0 
+8d8b2000-8d8cf000 rwxp 8d8b2000 00:00 0 
+8d8cf000-8ec90000 rwxp 8d8cf000 00:00 0 
+8ec90000-918d0000 rwxp 8ec90000 00:00 0 
+918d0000-934f0000 rwxp 918d0000 00:00 0 
+934f0000-adaa0000 rwxp 934f0000 00:00 0 
+adaa0000-b12d0000 rwxp adaa0000 00:00 0 
+b12d0000-b12d3000 r-xs 00000000 08:06 149388792  /var/cache/fontconfig/f6b893a7224233d96cb72fd88691c0b4-x86.cache-2
+b12d3000-b12e7000 rwxp b12d3000 00:00 0 
+b12e7000-b1393000 rwxp b12e7000 00:00 0 
+b1393000-b1873000 rwxp b1393000 00:00 0 
+b1873000-b4393000 rwxp b1873000 00:00 0 
+b4393000-b4bf9000 r-xs 00000000 08:06 509961276  /opt/sun-jdk-1.5.0.20/jre/lib/charsets.jar
+b4bf9000-b4c0e000 r-xs 00000000 08:06 510707011  /opt/sun-jdk-1.5.0.20/jre/lib/jce.jar
+b4c0e000-b4c93000 r-xs 00000000 08:06 509961261  /opt/sun-jdk-1.5.0.20/jre/lib/jsse.jar
+b4c93000-b4cfd000 rwxp b4c93000 00:00 0 
+b4cfd000-b7358000 r-xs 00000000 08:06 509961254  /opt/sun-jdk-1.5.0.20/jre/lib/rt.jar
+b7358000-b7379000 r-xp 00000000 08:06 40481421   /opt/sun-jdk-1.5.0.20/jre/lib/i386/libjava.so
+b7379000-b737b000 rwxp 00020000 08:06 40481421   /opt/sun-jdk-1.5.0.20/jre/lib/i386/libjava.so
+b737b000-b738e000 r-xp 00000000 08:06 107712041  /lib/libnsl-2.9.so
+b738e000-b738f000 r-xp 00012000 08:06 107712041  /lib/libnsl-2.9.so
+b738f000-b7390000 rwxp 00013000 08:06 107712041  /lib/libnsl-2.9.so
+b7390000-b7392000 rwxp b7390000 00:00 0 
+b7392000-b7396000 r-xs 00000000 08:08 1820291    /home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/lib/annotations-api.jar
+b7396000-b73a5000 r-xp 00000000 08:06 40481423   /opt/sun-jdk-1.5.0.20/jre/lib/i386/libzip.so
+b73a5000-b73a7000 rwxp 0000e000 08:06 40481423   /opt/sun-jdk-1.5.0.20/jre/lib/i386/libzip.so
+b73a7000-b73b2000 r-xp 00000000 08:06 40481420   /opt/sun-jdk-1.5.0.20/jre/lib/i386/libverify.so
+b73b2000-b73b3000 rwxp 0000b000 08:06 40481420   /opt/sun-jdk-1.5.0.20/jre/lib/i386/libverify.so
+b73b3000-b73bb000 rwxs 00000000 00:0f 7270635    /tmp/hsperfdata_kiorky/7777
+b73bb000-b73df000 r-xp 00000000 08:06 107680742  /lib/libm-2.9.so
+b73df000-b73e0000 r-xp 00023000 08:06 107680742  /lib/libm-2.9.so
+b73e0000-b73e1000 rwxp 00024000 08:06 107680742  /lib/libm-2.9.so
+b73e1000-b794b000 r-xp 00000000 08:06 105883714  /opt/sun-jdk-1.5.0.20/jre/lib/i386/server/libjvm.so
+b794b000-b79ae000 rwxp 00569000 08:06 105883714  /opt/sun-jdk-1.5.0.20/jre/lib/i386/server/libjvm.so
+b79ae000-b7dc7000 rwxp b79ae000 00:00 0 
+b7dc7000-b7efe000 r-xp 00000000 08:06 107375018  /lib/libc-2.9.so
+b7efe000-b7f00000 r-xp 00137000 08:06 107375018  /lib/libc-2.9.so
+b7f00000-b7f01000 rwxp 00139000 08:06 107375018  /lib/libc-2.9.so
+b7f01000-b7f04000 rwxp b7f01000 00:00 0 
+b7f04000-b7f06000 r-xp 00000000 08:06 107680744  /lib/libdl-2.9.so
+b7f06000-b7f07000 r-xp 00001000 08:06 107680744  /lib/libdl-2.9.so
+b7f07000-b7f08000 rwxp 00002000 08:06 107680744  /lib/libdl-2.9.so
+b7f08000-b7f09000 rwxp b7f08000 00:00 0 
+b7f09000-b7f1d000 r-xp 00000000 08:06 107680765  /lib/libpthread-2.9.so
+b7f1d000-b7f1e000 r-xp 00013000 08:06 107680765  /lib/libpthread-2.9.so
+b7f1e000-b7f1f000 rwxp 00014000 08:06 107680765  /lib/libpthread-2.9.so
+b7f1f000-b7f21000 rwxp b7f1f000 00:00 0 
+b7f22000-b7f23000 r-xp 0038b000 08:06 411808295  /usr/lib/locale/locale-archive
+b7f23000-b7f2c000 r-xp 00000000 08:06 107706731  /lib/libnss_files-2.9.so
+b7f2c000-b7f2d000 r-xp 00008000 08:06 107706731  /lib/libnss_files-2.9.so
+b7f2d000-b7f2e000 rwxp 00009000 08:06 107706731  /lib/libnss_files-2.9.so
+b7f2e000-b7f37000 r-xp 00000000 08:06 107715037  /lib/libnss_nis-2.9.so
+b7f37000-b7f38000 r-xp 00008000 08:06 107715037  /lib/libnss_nis-2.9.so
+b7f38000-b7f39000 rwxp 00009000 08:06 107715037  /lib/libnss_nis-2.9.so
+b7f39000-b7f3f000 r-xp 00000000 08:06 107729189  /lib/libnss_compat-2.9.so
+b7f3f000-b7f40000 r-xp 00005000 08:06 107729189  /lib/libnss_compat-2.9.so
+b7f40000-b7f41000 rwxp 00006000 08:06 107729189  /lib/libnss_compat-2.9.so
+b7f41000-b7f47000 r-xp 00000000 08:06 74640433   /opt/sun-jdk-1.5.0.20/jre/lib/i386/native_threads/libhpi.so
+b7f47000-b7f48000 rwxp 00006000 08:06 74640433   /opt/sun-jdk-1.5.0.20/jre/lib/i386/native_threads/libhpi.so
+b7f48000-b7f49000 rwxp b7f48000 00:00 0 
+b7f49000-b7f4a000 r-xp b7f49000 00:00 0 
+b7f4a000-b7f4b000 rwxp b7f4a000 00:00 0 
+b7f4b000-b7f67000 r-xp 00000000 08:06 107375016  /lib/ld-2.9.so
+b7f67000-b7f68000 r-xp 0001b000 08:06 107375016  /lib/ld-2.9.so
+b7f68000-b7f69000 rwxp 0001c000 08:06 107375016  /lib/ld-2.9.so
+bfa06000-bfa09000 ---p bfa06000 00:00 0 
+bfa09000-bfc06000 rwxp bfe03000 00:00 0          [stack]
+ffffe000-fffff000 r-xp 00000000 00:00 0          [vdso]
+
+VM Arguments:
+jvm_args: -Djava.util.logging.config.file=/home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/tomcat/mcbuildbot/conf/logging.properties -Dminitage.startup.mc.buildbot.mcbuildbot=1 -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Djava.awt.headless=true -Djava.awt.headless=true -Djava.endorsed.dirs=/home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/endorsed -Dcatalina.base=/home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/tomcat/mcbuildbot -Dcatalina.home=/home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part -Djava.io.tmpdir=/home/kiorky/minitage/buildbot/mc.buildbot/sys/var/data/tomcat/mcbuildbot/temp
+java_command: org.apache.catalina.startup.Bootstrap start
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=/etc/java-config-2/current-system-vm
+CLASSPATH=/home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/bin/bootstrap.jar
+LD_LIBRARY_PATH=/opt/sun-jdk-1.5.0.20/jre/lib/i386/server:/opt/sun-jdk-1.5.0.20/jre/lib/i386:/opt/sun-jdk-1.5.0.20/jre/../lib/i386:/home/kiorky/minitage/buildbot/mc.buildbot/lib:/home/kiorky/minitage/buildbot/mc.buildbot/sys/lib:/home/kiorky/minitage/lib:/home/kiorky/minitage/dependencies/python-2.4/parts/part/lib:/home/kiorky/minitage/dependencies/libiconv-1.12/parts/part/lib:/home/kiorky/minitage/dependencies/libxslt-1.1/parts/part/lib:/home/kiorky/minitage/dependencies/libxml2-2.6/parts/part/lib:/home/kiorky/minitage/dependencies/expat-2.0/parts/part/lib:/home/kiorky/minitage/dependencies/db-4.4/parts/part/lib:/home/kiorky/minitage/dependencies/libpcre-8.0/parts/part/lib:/home/kiorky/minitage/dependencies/bzip2-1.0/parts/part/lib:/home/kiorky/minitage/dependencies/readline-5.2/parts/part/lib:/home/kiorky/minitage/dependencies/openssl-0.9/parts/part/lib:/home/kiorky/minitage/dependencies/ncurses-5.6/parts/part/lib:/home/kiorky/minitage/dependencies/libgif-4.1/parts/part/lib:/home/kiorky/minitage/dependencies/libpng-1.2/parts/part/lib:/home/kiorky/minitage/dependencies/libtiff-3.8/parts/part/lib:/home/kiorky/minitage/dependencies/freetype-2.3/parts/part/lib:/home/kiorky/minitage/dependencies/libjpeg-7/parts/part/lib:/home/kiorky/minitage/dependencies/zlib-1.2/parts/part/lib::/home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/lib:/home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/lib:/home/kiorky/minitage/dependencies/tomcat-6.0.24/parts/part/lib
+SHELL=/bin/bash
+DISPLAY=:0
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0x517270], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGBUS: [libjvm.so+0x517270], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGFPE: [libjvm.so+0x43a0a0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGPIPE: [libjvm.so+0x43a0a0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGILL: [libjvm.so+0x43a0a0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGUSR1: SIG_DFL, sa_mask[0]=0x00000000, sa_flags=0x00000000
+SIGUSR2: [libjvm.so+0x43c4f0], sa_mask[0]=0x00000004, sa_flags=0x10000004
+SIGHUP: [libjvm.so+0x43bf20], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGINT: SIG_IGN, sa_mask[0]=0x00000000, sa_flags=0x00000000
+SIGQUIT: [libjvm.so+0x43bf20], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGTERM: [libjvm.so+0x43bf20], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+
+
+---------------  S Y S T E M  ---------------
+
+OS:Gentoo Base System release 2.0.1
+
+uname:Linux 2.6.29-vs2.3.0.36.14-gentoo #4 SMP PREEMPT Tue Sep 15 14:58:24 CEST 2009 i686
+libc:glibc 2.9 NPTL 2.9 
+rlimit: STACK 8192k, CORE 0k, NPROC 16374, NOFILE 1024, AS infinity
+load average:0.35 0.30 0.27
+
+CPU:total 2 (cores per cpu 2, threads per core 1) family 6 model 15 stepping 13, cmov, cx8, fxsr, mmx, sse, sse2
+
+Memory: 4k page, physical 2069020k(91148k free), swap 1534168k(711280k free)
+
+vm_info: Java HotSpot(TM) Server VM (1.5.0_20-b02) for linux-x86, built on Jun 18 2009 12:08:29 by java_re with gcc 3.2.1-7a (J2SE release)
+
+time: Fri Feb 19 15:54:10 2010
+elapsed time: 287 seconds
+

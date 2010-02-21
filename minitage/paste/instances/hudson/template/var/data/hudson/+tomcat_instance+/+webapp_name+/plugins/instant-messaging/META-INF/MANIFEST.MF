@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: ckutz
+Build-Jdk: 1.6.0_16
+Extension-Name: instant-messaging
+Implementation-Title: instant-messaging
+Implementation-Version: 1.4
+Short-Name: instant-messaging
+Long-Name: Hudson instant-messaging plugin
+Url: http://wiki.hudson-ci.org/display/HUDSON/Instant+Messaging+Plugin
+Plugin-Version: 1.4
+Hudson-Version: 1.327
+Plugin-Developers: Christoph Kutzinski:kutzi:kutzi@gmx.de
+
