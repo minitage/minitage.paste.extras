@@ -30,7 +30,6 @@ Please look the official documentation for further instructions::
 
     http://minitage.org/paster/instances/index.html
 
-======================================
 Makina Corpus sponsorised software
 ======================================
 |makinacom|_
