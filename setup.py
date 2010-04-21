@@ -16,7 +16,7 @@ def read(rnames):
 setup(
     name=name,
     version=version,
-    description='Extension for minitage.paste allowing users to have some server instaces configured on top of projects',
+    description='Extension for minitage.paste allowing users to have some server instaces configured on top of projects sponsorised by Makina Corpus',
     download_url='http://distfiles.minitage.org/public/externals/minitage/',
     long_description= (
         read('README.txt')

@@ -30,4 +30,12 @@ Please look the official documentation for further instructions::
 
     http://minitage.org/paster/instances/index.html
 
+Makina Corpus Sponsorised software
+======================================
+
+  http://www.makina-corpus.com & http://makina-corpus.org
+
+    plone at makina-corpus org
+
+
 
